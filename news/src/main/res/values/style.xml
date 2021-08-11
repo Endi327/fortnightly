@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TimeView">
+        <item name="android:textSize">@dimen/basic_text_size</item>
+        <item name="android:textColor">@color/hours</item>
+        <item name="android:fontFamily">@font/merriweather_light</item>
+    </style>
+    <style name="TitleView">
+        <item name="android:textSize">@dimen/basic_text_size</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:fontFamily">@font/merriweather_light</item>
+    </style>
+    <style name="DetailCategoryView">
+        <item name="android:textSize">@dimen/basic_text_size</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:fontFamily">@font/merriweath_black</item>
+    </style>
+    <style name="DetailTitleView">
+        <item name="android:textSize">@dimen/large_text_size</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:fontFamily">@font/merriweath_black</item>
+    </style>
+    <style name="DetailDescriptionView">
+        <item name="android:textSize">@dimen/basic_text_size</item>
+        <item name="android:textColor">@color/textColorLight</item>
+        <item name="android:fontFamily">@font/merriweath_black</item>
+    </style>
+</resources>
