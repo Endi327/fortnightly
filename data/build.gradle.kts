@@ -35,6 +35,10 @@ dependencies {
 
     android {
         implementation(core)
+        implementation(room)
+        implementation(roomAnnotations)
+        implementation(roomCompiler)
+        implementation(roomKtx)
     }
 
     kotlinx {

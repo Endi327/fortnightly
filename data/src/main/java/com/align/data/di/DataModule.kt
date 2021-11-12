@@ -1,7 +1,9 @@
 package com.align.data.di
 
 import android.content.Context
+import androidx.room.Room
 import com.align.core.threads.BackgroundDispatcher.Background
+import com.align.data.database.AppDatabase
 import com.align.data.network.FortnightlyService
 import com.align.domain.ConstantsProvider
 import com.google.gson.Gson
@@ -72,6 +74,16 @@ internal object DataModule {
     @Provides
     fun provideCoroutineDispatcher(): CoroutineDispatcher {
         return Dispatchers.Background
+    }
+
+    @Singleton
+    @Provides
+    fun provideDatabase(context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            "fortnightly-database"
+        ).build()
     }
 
     @Singleton

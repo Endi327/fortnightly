@@ -1,6 +1,5 @@
 package com.align.domain
 
-import java.net.UnknownHostException
 import retrofit2.HttpException
 
 sealed class FortnightlyError {

@@ -1,14 +1,14 @@
-package com.align.data.mappers
+package com.align.data.database.mappers
 
 import com.align.common.toFortnighltyLocalDateTime
-import com.align.data.network.entities.ArticleDto
+import com.align.data.database.entities.ArticleEntity
+import com.align.data.mappers.Mapper
 import com.align.domain.entities.Article
 
-internal class ArticleDtoToArticleMapper: Mapper<ArticleDto, Article> {
-    override fun map(from: ArticleDto): Article = from.run {
+internal class ArticleEntityToArticleMapper: Mapper<ArticleEntity, Article> {
+    override fun map(from: ArticleEntity): Article = from.run {
         Article(
-            id = publishedAt.hashCode().toString(),
-            source = SourceDtoToSourceMapper().map(source),
+            source = SourceEntityToSourceMapper().map(source),
             author = author,
             title = title,
             description = description,

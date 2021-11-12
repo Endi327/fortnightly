@@ -8,6 +8,7 @@ interface Modules {
     val data: Dependency
     val domain: Dependency
     val news: Dependency
+    val splash: Dependency
     val resources: Dependency
 }
 
@@ -30,4 +31,7 @@ val DependencyHandler.Modules: Modules
 
         override val resources: Dependency
             get() = project(":resources")
+
+        override val splash: Dependency
+            get() = project(":splash")
     }

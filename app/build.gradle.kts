@@ -84,4 +84,5 @@ dependencies {
     implementation(Modules.data)
     implementation(Modules.resources)
     implementation(Modules.news)
+    implementation(Modules.splash)
 }

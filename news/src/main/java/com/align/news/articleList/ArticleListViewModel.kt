@@ -9,7 +9,6 @@ import com.align.core.mvi.feature.ActorReducerNewsFeature
 import com.align.domain.FortnightlyError
 import com.align.domain.entities.Article
 import com.align.domain.toFortnightlyError
-import com.align.domain.usecases.GetArticlesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
