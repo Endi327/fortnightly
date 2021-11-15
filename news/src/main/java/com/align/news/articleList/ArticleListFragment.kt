@@ -90,7 +90,7 @@ internal class ArticleListFragment:
                 val mItem = item as ArticleItemView
                 findNavController().navigate(
                     ArticleListFragmentDirections.listToDetails(
-                        image = mItem.article.urlToImage,
+                        image = mItem.article.urlToImage ?: "",
                         title = mItem.article.title,
                         description = mItem.article.content,
                         category = mItem.article.source.name

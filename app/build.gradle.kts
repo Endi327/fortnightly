@@ -52,7 +52,6 @@ dependencies {
         implementation(navigationUI)
         implementation(navigationFragment)
         implementation(fragment)
-        implementation(hiltViewModel)
         implementation(paging)
         implementation(lifecycleProcess)
     }
@@ -68,8 +67,8 @@ dependencies {
 
     google {
         implementation(design)
-        implementation(hilt)
         implementation(gson)
+        implementation(hilt)
         kapt(hiltCompiler)
     }
 
