@@ -16,11 +16,6 @@ dependencies {
         implementation(fastAdapterDiff)
     }
 
-    thirparty {
-        implementation(timber)
-    }
-
-    android {
-        implementation(core)
-    }
+    implementation(JakeWharton.timber)
+    implementation(AndroidX.core.ktx)
 }

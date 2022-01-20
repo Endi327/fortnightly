@@ -9,8 +9,8 @@ buildscript {
         jitpack()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.2.1")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${CommonVersions.kotlin}")
+        classpath(Android.tools.build.gradlePlugin)
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
 
         android {
             classpath(navigationSafeArgs)
@@ -49,14 +49,14 @@ subprojects {
                     }
                 }
 
-                enableViewBinding()
+                buildFeatures.viewBinding = true
 
                 compileOptions {
                     isCoreLibraryDesugaringEnabled = true
                 }
 
                 dependencies {
-                    "coreLibraryDesugaring"("com.android.tools:desugar_jdk_libs:1.1.1")
+                    "coreLibraryDesugaring"(Android.tools.desugarJdkLibs)
                 }
 
                 sourceSets {

@@ -9,23 +9,18 @@ kapt {
 }
 
 dependencies {
-    android {
-        implementation(appCompat)
-        implementation(core)
-        implementation(fragment)
-        implementation(lifecycleProcess)
-        implementation(lifecycleExtension)
-        implementation(lifecycleRuntime)
-        implementation(lifecycleCommonJava)
-    }
+    implementation(AndroidX.core.ktx)
+    implementation(AndroidX.appCompat)
+    implementation(AndroidX.fragment.ktx)
+    implementation(AndroidX.fragment.ktx)
+    implementation(AndroidX.lifecycle.process)
+    implementation(AndroidX.lifecycle.extensions)
+    implementation(AndroidX.lifecycle.runtimeKtx)
+    implementation(AndroidX.lifecycle.commonJava8)
 
-    thirparty {
-        implementation(timber)
-    }
+    implementation(JakeWharton.timber)
 
-    kotlinx {
-        implementation(coroutinesCore)
-    }
+    implementation(KotlinX.coroutines.core)
 
     implementation(Modules.domain)
     implementation(Modules.common)

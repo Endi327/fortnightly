@@ -10,18 +10,11 @@ kapt {
 }
 
 dependencies {
-    thirparty {
-        implementation(timber)
+    implementation(JakeWharton.timber)
+    implementation(Square.retrofit2)
 
-        implementation(retrofit)
-    }
+    implementation(Google.dagger.hilt.android)
+    kapt(Google.dagger.hilt.compiler)
 
-    google {
-        implementation(hilt)
-        kapt(hiltCompiler)
-    }
-
-    kotlinx {
-        implementation(coroutinesCore)
-    }
+    implementation(KotlinX.coroutines.core)
 }
