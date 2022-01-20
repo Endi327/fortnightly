@@ -20,11 +20,11 @@ jobs:
           java-version: 11
 
       - name: Cache Gradle packages
-        uses: actions/cache@v2
+        uses: Endi327/setup-java@v2.5.1
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
+         distribution: 'zulu'
+         java-version: '11'
+         cache: 'gradle'
 
       - name: Unit tests
         env:
@@ -45,11 +45,11 @@ jobs:
           java-version: 11
 
       - name: Cache Gradle packages
-        uses: actions/cache@v2
+        uses: Endi327/setup-java@v2.5.1
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
+          distribution: 'zulu'
+          java-version: '11'
+          cache: 'gradle'
 
       - name: Android Lint
         run: bash ./gradlew lint
