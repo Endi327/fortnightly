@@ -1,0 +1,136 @@
+name: CI checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  unittest:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    env:
+      JFROG_USERNAME: ${{ secrets.GLOBAL_CI_JFROG_USER }}
+      JFROG_API_KEY: ${{ secrets.GLOBAL_CI_JFROG_API_KEY }}
+      RELEASE_HERE_KEY_ID: ${{ secrets.RELEASE_HERE_KEY_ID }}
+      RELEASE_HERE_KEY_SECRET: ${{ secrets.RELEASE_HERE_KEY_SECRET }}
+      DEBUG_HERE_KEY_ID: ${{ secrets.DEBUG_HERE_KEY_ID }}
+      DEBUG_HERE_KEY_SECRET: ${{ secrets.DEBUG_HERE_KEY_SECRET }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: zulu
+          java-version: 11
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+
+      - name: Unit tests
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: |
+          bash ./gradlew test --stacktrace
+
+      - uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: Unit tests failed https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          fields: commit,message,author
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: failure()
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    env:
+      JFROG_USERNAME: ${{ secrets.GLOBAL_CI_JFROG_USER }}
+      JFROG_API_KEY: ${{ secrets.GLOBAL_CI_JFROG_API_KEY }}
+      RELEASE_HERE_KEY_ID: ${{ secrets.RELEASE_HERE_KEY_ID }}
+      RELEASE_HERE_KEY_SECRET: ${{ secrets.RELEASE_HERE_KEY_SECRET }}
+      DEBUG_HERE_KEY_ID: ${{ secrets.DEBUG_HERE_KEY_ID }}
+      DEBUG_HERE_KEY_SECRET: ${{ secrets.DEBUG_HERE_KEY_SECRET }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: zulu
+          java-version: 11
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+
+      - name: Android Lint
+        run: bash ./gradlew lint
+
+      - name: Ktlint
+        run: bash ./gradlew ktlintCheck
+
+      - name: Run Shellcheck
+        uses: azohra/shell-linter@latest
+        with:
+          path: "scripts/*.sh"
+
+      - uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: Lint checks failed https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          fields: commit,message,author
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: failure()
+
+  buildHere4x:
+    name: Pathfinder-Here4x debug build
+    runs-on: ubuntu-latest
+    env:
+      JFROG_USERNAME: ${{ secrets.GLOBAL_CI_JFROG_USER }}
+      JFROG_API_KEY: ${{ secrets.GLOBAL_CI_JFROG_API_KEY }}
+      RELEASE_HERE_KEY_ID: ${{ secrets.RELEASE_HERE_KEY_ID }}
+      RELEASE_HERE_KEY_SECRET: ${{ secrets.RELEASE_HERE_KEY_SECRET }}
+      DEBUG_HERE_KEY_ID: ${{ secrets.DEBUG_HERE_KEY_ID }}
+      DEBUG_HERE_KEY_SECRET: ${{ secrets.DEBUG_HERE_KEY_SECRET }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: zulu
+          java-version: 11
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+
+      - name: Build debug APK
+        run: bash ./gradlew assembleHere4xDebug
+
+      - uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: Pathfinder-Here4x build failed https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          fields: commit,message,author
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: failure()
