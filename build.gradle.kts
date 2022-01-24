@@ -9,7 +9,7 @@ buildscript {
         jitpack()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.2.1")
+        classpath(Android.tools.build.gradlePlugin)
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${CommonVersions.kotlin}")
 
         android {
@@ -49,7 +49,7 @@ subprojects {
                     }
                 }
 
-                enableViewBinding()
+                buildFeatures.viewBinding = true
 
                 compileOptions {
                     isCoreLibraryDesugaringEnabled = true

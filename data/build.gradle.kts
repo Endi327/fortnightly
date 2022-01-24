@@ -26,28 +26,22 @@ android {
 }
 
 dependencies {
-    thirparty {
-        implementation(timber)
+    implementation(JakeWharton.timber)
+    implementation(Square.retrofit2)
+    implementation(Square.okHttp3.loggingInterceptor)
 
-        implementation(okhttpLogging)
-        implementation(retrofit)
-    }
+    implementation(AndroidX.core.ktx)
 
-    android {
-        implementation(core)
-    }
-
-    kotlinx {
-        implementation(coroutinesCore)
-        implementation(coroutinesAndroid)
-    }
+    implementation(KotlinX.coroutines.core)
+    implementation(KotlinX.coroutines.android)
 
     google {
-        implementation(hilt)
         implementation(gson)
         implementation(gsonConverter)
-        kapt(hiltCompiler)
     }
+
+    implementation(Google.dagger.hilt.android)
+    kapt(Google.dagger.hilt.compiler)
 
     implementation(Modules.domain)
     implementation(Modules.core)

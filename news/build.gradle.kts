@@ -12,9 +12,9 @@ kapt {
 
 dependencies {
     thirparty {
-        implementation(timber)
         implementation(glide)
     }
+    implementation(JakeWharton.timber)
 
     fastadapter {
         implementation(fastAdapter)
@@ -23,20 +23,20 @@ dependencies {
         implementation(fastAdapterPaged)
     }
 
+    implementation(AndroidX.fragment)
+    implementation(AndroidX.navigation.uiKtx)
+    implementation(AndroidX.navigation.fragmentKtx)
+
     android {
-        implementation(fragment)
-        implementation(navigationUI)
-        implementation(navigationFragment)
         implementation(hiltViewModel)
     }
 
-    google {
-        implementation(hilt)
-        implementation(design)
-        kapt(hiltCompiler)
-    }
+    implementation(Google.dagger.hilt.android)
+    implementation(Google.android.material)
+    kapt(Google.dagger.hilt.compiler)
 
     implementation(Modules.common)
     implementation(Modules.domain)
     implementation(Modules.core)
 }
+

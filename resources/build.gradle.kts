@@ -4,7 +4,5 @@ plugins {
 }
 
 dependencies {
-    google {
-        implementation(design)
-    }
+    implementation(Google.android.material)
 }
